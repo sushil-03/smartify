@@ -16,12 +16,24 @@
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/yourusername/yourproject.git
+   git clone https://github.com/sushil-03/smartify
 
    ```
 
-2. cd smartify
+2. Change directory to smartify
 
-3. npm install
+```sh
+  cd smartify
+```
 
-4. npm start
+3. Install Dependency
+
+```sh
+  npm install
+```
+
+4. Start Local server
+
+```
+  npm start
+```
