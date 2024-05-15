@@ -10,7 +10,7 @@ const CustomSlider = ({
   defaultValue,
 }: CustomSliderT) => {
   const theme = useTheme();
-  const [isSmall, setIsmall] = useState(false);
+  const [isSmall, setIsmall] = useState<boolean>();
 
   const updateOrientation = () => {
     if (window.innerWidth >= 900) {
@@ -26,6 +26,10 @@ const CustomSlider = ({
     return () => {
       window.removeEventListener("resize", updateOrientation);
     };
+  }, []);
+
+  useEffect(() => {
+    updateOrientation();
   }, []);
 
   return (
