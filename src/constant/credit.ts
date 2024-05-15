@@ -1,4 +1,4 @@
-import { TopUpType } from "../components/common/CustomSlider";
+import { TopUpType } from "../types";
 
 export const creditConstant: TopUpType[] = [{
   price: "$5",

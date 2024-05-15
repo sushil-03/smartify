@@ -14,7 +14,6 @@ const CustomSlider = ({
 
   const updateOrientation = () => {
     if (window.innerWidth >= 900) {
-      // Assuming medium screen size is 768px
       setIsmall(false);
     } else {
       setIsmall(true);
