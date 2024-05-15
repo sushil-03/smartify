@@ -1,6 +1,7 @@
 import Slider from "@mui/material/Slider";
 import { Box, Typography, useTheme } from "@mui/material";
 import { CustomSliderT } from "../../types";
+import { useEffect, useState } from "react";
 
 const CustomSlider = ({
   value,
@@ -9,9 +10,33 @@ const CustomSlider = ({
   defaultValue,
 }: CustomSliderT) => {
   const theme = useTheme();
+  const [isSmall, setIsmall] = useState(false);
+
+  const updateOrientation = () => {
+    if (window.innerWidth >= 900) {
+      // Assuming medium screen size is 768px
+      setIsmall(false);
+    } else {
+      setIsmall(true);
+    }
+  };
+
+  // Add event listener for window resize
+  useEffect(() => {
+    window.addEventListener("resize", updateOrientation);
+    return () => {
+      window.removeEventListener("resize", updateOrientation);
+    };
+  }, []);
+
   return (
-    <div>
+    <div
+      style={{
+        height: isSmall ? "400px" : "",
+      }}
+    >
       <Slider
+        orientation={isSmall ? "vertical" : "horizontal"}
         onChange={(_: Event, value: number | number[]) => {
           const changeNum = Array.isArray(value) ? value[0] : value;
           console.log("", _);
@@ -31,7 +56,7 @@ const CustomSlider = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            position: "relative",
+            position: isSmall ? "" : "relative",
           },
           "& .MuiSlider-thumb::before, & .MuiSlider-thumb::after": {
             content: "''",
@@ -67,7 +92,7 @@ const CustomSlider = ({
                 right: "0px",
                 textAlign: "left",
                 margin: {
-                  sm:
+                  md:
                     index < marks.length / 2
                       ? `0px 0px 0px ${70 - index * 10}px`
                       : ` 0px ${70 - index * 30}px 0px 0px`,
@@ -89,10 +114,6 @@ const CustomSlider = ({
                   color: "#7B7B7B",
                   fontSize: "13px",
                   fontWeight: 500,
-                  display: {
-                    sm: "block",
-                    xs: "none",
-                  },
                 }}
               >
                 {mark.label}
